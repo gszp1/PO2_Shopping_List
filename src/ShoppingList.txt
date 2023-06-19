@@ -1,0 +1,7 @@
+#Spożywcze
+Chleb|kg|1
+Masło|kg|3.5
+#Chemia
+Mydło|l|4.5
+#Motoryzacja
+Odświeżacz powietrza
