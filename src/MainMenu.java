@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 public class MainMenu extends JFrame {
@@ -29,7 +31,10 @@ public class MainMenu extends JFrame {
     private JButton removeProductButton;
     private JButton removeAllProductButton;
     private JButton saveListButton;
-    private JButton modifyListButton;
+
+    private JButton addToProductsListButton;
+
+    private JButton removeFromProductsListButton;
 
     public MainMenu() {
         shoppingListHandler = new ShoppingListInputOutput();
@@ -65,7 +70,7 @@ public class MainMenu extends JFrame {
         addProductButton = new JButton("Add Product");
         addProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                addProductToProductsList();
+//
             }
         });
 
@@ -104,10 +109,17 @@ public class MainMenu extends JFrame {
             }
         });
 
-        modifyListButton= new JButton("Modify shop list");
-        modifyListButton.addActionListener(new ActionListener() {
+        addToProductsListButton = new JButton("Add to products list");
+        addToProductsListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//
+                addProductToProductsList();
+            }
+        });
+
+        removeFromProductsListButton = new JButton("Remove from products list");
+        removeFromProductsListButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeProductFromProductsList();
             }
         });
     }
@@ -120,7 +132,8 @@ public class MainMenu extends JFrame {
         buttonsPanel.add(removeProductButton);
         buttonsPanel.add(saveListButton);
         buttonsPanel.add(removeAllProductButton);
-        buttonsPanel.add(modifyListButton);
+        buttonsPanel.add(addToProductsListButton);
+        buttonsPanel.add(removeFromProductsListButton);
     }
 
 
@@ -147,7 +160,7 @@ public class MainMenu extends JFrame {
 
     }
 
-    private void displayProducts() {
+    private void displayProducts(){
 
     }
 
@@ -197,6 +210,46 @@ public class MainMenu extends JFrame {
             return;
         }
         JOptionPane.showMessageDialog(this, "Product successfully added.");
+    }
+
+    private void removeProductFromProductsList() {
+        String productName = JOptionPane.showInputDialog(this, "Enter product name:");
+        if (productName == null) {
+            return;
+        }
+
+        Product product = productsList.findProduct(productName);
+        if (product == null) {
+            JOptionPane.showMessageDialog(this, "Product does not exist.");
+            return;
+        }
+
+        Category categoryToRemove = null;
+        for (Category i : productsList.getContents()) {
+            boolean found = false;
+            for (Product j : i.getProducts()) {
+                if (j.getName().equals(productName)) {
+                    found = true;
+                }
+            }
+            if(found) {
+                if(i.getProducts().size() == 1) {
+                    categoryToRemove = i;
+                }
+                i.getProducts().remove(product);
+            }
+        }
+
+        if (categoryToRemove != null) {
+            productsList.getContents().remove(categoryToRemove);
+        }
+
+        try {
+            productsListHandler.saveProductsList(productsList);
+            JOptionPane.showMessageDialog(this, "Product successfully removed");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Failed to save changes.");
+        }
     }
 
     private void saveShoppingList() {
