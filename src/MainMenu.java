@@ -53,8 +53,6 @@ public class MainMenu extends JFrame {
 
         initializeComponents();
         createLayout();
-
-
     }
 
     private void initializeComponents() {
@@ -163,7 +161,7 @@ public class MainMenu extends JFrame {
     private void displayProducts(){
         String result = "";
         for(Category i : shoppingList.getContents()) {
-            result = result.concat(i.getName()).concat("\n");
+            result = result.concat(i.getName()).concat(":\n");
             for(Product j : i.getProducts()) {
                 result = result.concat("\t").
                         concat(j.getName()).
@@ -308,8 +306,3 @@ public class MainMenu extends JFrame {
     }
 
 }
-
-
-
-
-

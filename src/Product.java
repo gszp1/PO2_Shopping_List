@@ -1,5 +1,5 @@
 public class Product {
-    public static String [] allowedTypes = {"kg", "l", "sztuka"};
+    public static String [] allowedTypes = {"kg", "l", "sztuka", "metr"};
 
     private final String name;
 
