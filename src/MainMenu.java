@@ -91,7 +91,7 @@ public class MainMenu extends JFrame {
         showAllProductsButton = new JButton("Display all products");
         showAllProductsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//
+                displayProducts();
             }
         });
 
@@ -161,7 +161,21 @@ public class MainMenu extends JFrame {
     }
 
     private void displayProducts(){
+        String result = "";
+        for(Category i : shoppingList.getContents()) {
+            result = result.concat(i.getName()).concat("\n");
+            for(Product j : i.getProducts()) {
+                result = result.concat("\t").
+                        concat(j.getName()).
+                        concat(" ").
+                        concat(j.typeParser()).
+                        concat(" ").
+                        concat(j.getType()).
+                        concat("\n");
+            }
+        }
 
+        outputTextArea.setText(result);
     }
 
     private void displayProductsByCategory() {
