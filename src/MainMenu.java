@@ -28,10 +28,9 @@ public class MainMenu extends JFrame {
     private JButton removeProductButton;
     private JButton removeAllProductButton;
     private JButton saveListButton;
-
     private JButton addToProductsListButton;
-
     private JButton removeFromProductsListButton;
+    private JButton removeProductsFromCategory;
 
     public MainMenu() {
         shoppingListHandler = new ShoppingListInputOutput();
@@ -120,12 +119,20 @@ public class MainMenu extends JFrame {
                 removeProductFromProductsList();
             }
         });
+
+        removeProductsFromCategory = new JButton("Remove products from category");
+        removeProductsFromCategory.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeProductsFromCategory();
+            }
+        });
     }
 
     private void createButtonsPanel() {
         buttonsPanel = new JPanel(new FlowLayout());
         buttonsPanel.add(addProductButton);
         buttonsPanel.add(removeProductButton);
+        buttonsPanel.add(removeProductsFromCategory);
         buttonsPanel.add(removeAllProductButton);
         buttonsPanel.add(saveListButton);
         buttonsPanel.add(showAllProductsButton);
@@ -303,6 +310,27 @@ public class MainMenu extends JFrame {
 
     private void addProductToShoppingList() {
 
+    }
+
+    private void removeProductsFromCategory() {
+        String categoryName = JOptionPane.showInputDialog(this, "Enter category name:");
+        if(categoryName == null) {
+            return;
+        }
+
+        Category toRemove = null;
+        for (Category i : shoppingList.getContents()) {
+            if (i.getName().equals(categoryName)) {
+                toRemove = i;
+            }
+        }
+
+        if (toRemove == null) {
+            JOptionPane.showMessageDialog(this, "Category does not exist.");
+            return;
+        }
+
+        shoppingList.getContents().remove(toRemove);
     }
 
 }
