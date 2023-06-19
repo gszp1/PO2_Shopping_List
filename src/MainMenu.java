@@ -2,10 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 
 public class MainMenu extends JFrame {
@@ -67,45 +64,48 @@ public class MainMenu extends JFrame {
         inputTextArea = new JTextArea(10, 40);
         inputTextArea.setEditable(true);
 
-        addProductButton = new JButton("Add Product");
+        initButtons();
+    }
+
+    private void initButtons() {
+        addProductButton = new JButton("Add product to list");
         addProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//
             }
         });
 
-        showAllProductsButton = new JButton("Show All Products");
-        showAllProductsButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-//
-            }
-        });
-
-        showProductsByCategoryButton = new JButton("Show Products by Category");
-        showProductsByCategoryButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-//
-            }
-        });
-
-        removeProductButton = new JButton("Remove Product");
+        removeProductButton = new JButton("Remove product from list");
         removeProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //
             }
         });
 
-        saveListButton = new JButton("Save List");
-        saveListButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                saveShoppingList();
-            }
-        });
-
-        removeAllProductButton= new JButton("Remove all products");
+        removeAllProductButton= new JButton("Clear shopping list");
         removeAllProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 clearShoppingList();
+            }
+        });
+
+        showAllProductsButton = new JButton("Display all products");
+        showAllProductsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//
+            }
+        });
+
+        showProductsByCategoryButton = new JButton("Display by category");
+        showProductsByCategoryButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                displayProductsByCategory();
+            }
+        });
+
+        saveListButton = new JButton("Save list to file");
+        saveListButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                saveShoppingList();
             }
         });
 
@@ -127,11 +127,11 @@ public class MainMenu extends JFrame {
     private void createButtonsPanel() {
         buttonsPanel = new JPanel(new FlowLayout());
         buttonsPanel.add(addProductButton);
+        buttonsPanel.add(removeProductButton);
+        buttonsPanel.add(removeAllProductButton);
+        buttonsPanel.add(saveListButton);
         buttonsPanel.add(showAllProductsButton);
         buttonsPanel.add(showProductsByCategoryButton);
-        buttonsPanel.add(removeProductButton);
-        buttonsPanel.add(saveListButton);
-        buttonsPanel.add(removeAllProductButton);
         buttonsPanel.add(addToProductsListButton);
         buttonsPanel.add(removeFromProductsListButton);
     }
@@ -165,11 +165,38 @@ public class MainMenu extends JFrame {
     }
 
     private void displayProductsByCategory() {
+        String categoryName = JOptionPane.showInputDialog(this, "Enter category name:");
+        if (categoryName == null) {
+            return;
+        }
 
+        Category category = null;
+        for (Category i : shoppingList.getContents()) {
+            if (i.getName().equals(categoryName)) {
+                category = i;
+                break;
+            }
+        }
+
+        if (category == null) {
+            JOptionPane.showMessageDialog(this, "Category does not exist.");
+            return;
+        }
+
+        String result = "";
+        for (Product i : category.getProducts()) {
+            result = result.concat(i.getName()).
+                        concat(" ").
+                        concat(i.typeParser()).
+                        concat(" ").
+                        concat(i.getType()).
+                        concat("\n");
+        }
+
+        outputTextArea.setText(result);
     }
 
     private void addProductToProductsList() {
-
         String productName = JOptionPane.showInputDialog(this, "Enter product name:");
         if (productName == null) {
             return;
@@ -230,6 +257,7 @@ public class MainMenu extends JFrame {
             for (Product j : i.getProducts()) {
                 if (j.getName().equals(productName)) {
                     found = true;
+                    break;
                 }
             }
             if(found) {
