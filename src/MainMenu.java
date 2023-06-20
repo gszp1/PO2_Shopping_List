@@ -289,6 +289,11 @@ public class MainMenu extends JFrame {
         }
         productName = productName.trim();
 
+        if ((productName.equals("")) || (productName.equals(" "))) {
+            JOptionPane.showMessageDialog(this, "Invalid product name.");
+            return;
+        }
+
         if (productsList.findProduct(productName) != null) {
             JOptionPane.showMessageDialog(this, "Product already exists.");
             return;
@@ -299,6 +304,11 @@ public class MainMenu extends JFrame {
             return;
         }
         categoryName = categoryName.trim();
+
+        if ((categoryName.equals("")) || (categoryName.equals(" "))) {
+            JOptionPane.showMessageDialog(this, "Invalid category name.");
+            return;
+        }
 
         Category category = null;
         for(Category i : productsList.getContents()) {
@@ -452,6 +462,7 @@ public class MainMenu extends JFrame {
         }
 
         shoppingList.getContents().remove(toRemove);
+        JOptionPane.showMessageDialog(this, "Products from category deleted successfully.");
     }
 
     private void displayAvailableProducts() {
