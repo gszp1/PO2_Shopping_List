@@ -22,18 +22,34 @@ public class ShoppingListModificationDialogBox {
     }
 
     public String getTypeLabelContents() {
-        return (String)(cBox.getSelectedItem());
+        String result = (String)(cBox.getSelectedItem());
+        if (result != null) {
+            result = result.trim();
+        }
+        return result;
     }
 
     public String getQuantityLabelContents() {
-        return quantityField.getText();
+        String result = quantityField.getText();
+        if (result != null) {
+            result = result.trim();
+        }
+        return result;
     }
 
     public String getProductLabelContents() {
-        return productField.getText();
+        String result = productField.getText();;
+        if (result != null) {
+            result = result.trim();
+        }
+        return result;
     }
 
     public String getCategoryLabelContents() {
-        return categoryField.getText();
+        String result = categoryField.getText();
+        if (result != null) {
+            result = result.trim();
+        }
+        return result;
     }
 }

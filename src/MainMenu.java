@@ -253,6 +253,7 @@ public class MainMenu extends JFrame {
         if (categoryName == null) {
             return;
         }
+        categoryName = categoryName.trim();
 
         Category category = null;
         for (Category i : shoppingList.getContents()) {
@@ -286,6 +287,7 @@ public class MainMenu extends JFrame {
         if (productName == null) {
             return;
         }
+        productName = productName.trim();
 
         if (productsList.findProduct(productName) != null) {
             JOptionPane.showMessageDialog(this, "Product already exists.");
@@ -296,6 +298,7 @@ public class MainMenu extends JFrame {
         if(categoryName == null) {
             return;
         }
+        categoryName = categoryName.trim();
 
         Category category = null;
         for(Category i : productsList.getContents()) {
@@ -334,6 +337,7 @@ public class MainMenu extends JFrame {
         if (productName == null) {
             return;
         }
+        productName = productName.trim();
 
         Product product = productsList.findProduct(productName);
         if (product == null) {
@@ -433,6 +437,7 @@ public class MainMenu extends JFrame {
         if(categoryName == null) {
             return;
         }
+        categoryName = categoryName.trim();
 
         Category toRemove = null;
         for (Category i : shoppingList.getContents()) {
