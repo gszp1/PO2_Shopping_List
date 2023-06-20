@@ -174,6 +174,11 @@ public class MainMenu extends JFrame {
     }
 
     private void removeProductFromShoppingList() {
+        if (shoppingList.shoppingListIsEmpty()) {
+            JOptionPane.showMessageDialog(this, "Shopping list is empty.");
+            return;
+        }
+
         ShoppingListModificationDialogBox input = new ShoppingListModificationDialogBox();
         String quantityString = input.getQuantityLabelContents();
         String type = input.getTypeLabelContents();
@@ -276,6 +281,7 @@ public class MainMenu extends JFrame {
     }
 
     private void addProductToProductsList() {
+
         String productName = JOptionPane.showInputDialog(this, "Enter product name:");
         if (productName == null) {
             return;
@@ -319,6 +325,11 @@ public class MainMenu extends JFrame {
     }
 
     private void removeProductFromProductsList() {
+        if(productsList.productsListIsEmpty()) {
+            JOptionPane.showMessageDialog(this, "Products list is empty.");
+            return;
+        }
+
         String productName = JOptionPane.showInputDialog(this, "Enter product name:");
         if (productName == null) {
             return;
@@ -369,6 +380,11 @@ public class MainMenu extends JFrame {
     }
 
     private void addProductToShoppingList() {
+        if (productsList.productsListIsEmpty()) {
+            JOptionPane.showMessageDialog(this, "No products available to add.");
+            return;
+        }
+
         ShoppingListModificationDialogBox input = new ShoppingListModificationDialogBox();
         String categoryName = input.getCategoryLabelContents();
         String productName = input.getProductLabelContents();
@@ -408,6 +424,11 @@ public class MainMenu extends JFrame {
     }
 
     private void removeProductsFromCategory() {
+        if (shoppingList.shoppingListIsEmpty()) {
+            JOptionPane.showMessageDialog(this, "Shopping list is empty.");
+            return;
+        }
+
         String categoryName = JOptionPane.showInputDialog(this, "Enter category name:");
         if(categoryName == null) {
             return;

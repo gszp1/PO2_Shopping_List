@@ -28,4 +28,8 @@ public class ProductsList {
         return null;
     }
 
+    public boolean productsListIsEmpty() {
+        return contents.size() == 0;
+    }
+
 }

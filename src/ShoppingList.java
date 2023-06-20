@@ -25,4 +25,7 @@ public class ShoppingList {
         return null;
     }
 
+    public boolean shoppingListIsEmpty() {
+        return contents.size() == 0;
+    }
 }
