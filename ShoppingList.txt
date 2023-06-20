@@ -4,4 +4,4 @@ Masło|kg|3.5
 #Chemia
 Mydło|l|4.5
 #Elektronika
-Bateria alkaiczna|sztuka|10
+Bateria alkaiczna|sztuk/a|10
