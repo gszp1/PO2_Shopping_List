@@ -68,13 +68,14 @@ public class MainMenu extends JFrame {
         addProductButton = new JButton("Add product to list");
         addProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
             }
         });
 
         removeProductButton = new JButton("Remove product from list");
         removeProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//
+                removeProductFromShoppingList();
             }
         });
 
@@ -162,7 +163,43 @@ public class MainMenu extends JFrame {
     }
 
     private void removeProductFromShoppingList() {
+        TwoFieldsDialogBox input = new TwoFieldsDialogBox();
+        String categoryName = input.getCategoryFieldText();
+        String productName = input.getProductFieldText();
 
+        if((categoryName == null) || (productName == null)) {
+            return;
+        }
+
+        Category category = null;
+        for(Category i : shoppingList.getContents()) {
+            if(i.getName().equals(categoryName)) {
+                category = i;
+                break;
+            }
+        }
+        if(category == null) {
+            JOptionPane.showMessageDialog(this, "Category does not exist");
+            return;
+        }
+
+        Product product = null;
+        for(Product i : category.getProducts()) {
+            if(i.getName().equals(productName)) {
+                product = i;
+                break;
+            }
+        }
+        if(product == null) {
+            JOptionPane.showMessageDialog(this, "Product does not exist in selected category");
+            return;
+        }
+
+        category.getProducts().remove(product);
+        if (category.getProducts().size() == 0) {
+            shoppingList.getContents().remove(category);
+        }
+        JOptionPane.showMessageDialog(this, "Product removed successfully");
     }
 
     private void displayProducts(){
