@@ -22,15 +22,17 @@ public class MainMenu extends JFrame {
     private JTextArea outputTextArea;
     private JTextArea inputTextArea;
 
-    private JButton addProductButton;
-    private JButton showAllProductsButton;
-    private JButton showProductsByCategoryButton;
-    private JButton removeProductButton;
-    private JButton removeAllProductButton;
-    private JButton saveListButton;
+    private JButton showAllProductsFromShoppingListButton;
+    private JButton showProductsFromShoppingListByCategoryButton;
+    private JButton saveShoppingListToFileButton;
+
+    private JButton addProductToShoppingListButton;
+    private JButton removeProductFromShoppingListButton;
+    private JButton clearShoppingListButton;
+    private JButton removeProductsFromShoppingListInCategoryButton;
+
     private JButton addToProductsListButton;
     private JButton removeFromProductsListButton;
-    private JButton removeProductsFromCategoryButton;
     private JButton displayAvailableProductsButton;
 
     public MainMenu() {
@@ -66,43 +68,43 @@ public class MainMenu extends JFrame {
     }
 
     private void initButtons() {
-        addProductButton = new JButton("Add product to list");
-        addProductButton.addActionListener(new ActionListener() {
+        addProductToShoppingListButton = new JButton("Add product to list");
+        addProductToShoppingListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addProductToShoppingList();
             }
         });
 
-        removeProductButton = new JButton("Remove product from list");
-        removeProductButton.addActionListener(new ActionListener() {
+        removeProductFromShoppingListButton = new JButton("Remove product from list");
+        removeProductFromShoppingListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 removeProductFromShoppingList();
             }
         });
 
-        removeAllProductButton= new JButton("Clear shopping list");
-        removeAllProductButton.addActionListener(new ActionListener() {
+        clearShoppingListButton = new JButton("Clear shopping list");
+        clearShoppingListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 clearShoppingList();
             }
         });
 
-        showAllProductsButton = new JButton("Display all products");
-        showAllProductsButton.addActionListener(new ActionListener() {
+        showAllProductsFromShoppingListButton = new JButton("Display all products");
+        showAllProductsFromShoppingListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 displayProducts();
             }
         });
 
-        showProductsByCategoryButton = new JButton("Display by category");
-        showProductsByCategoryButton.addActionListener(new ActionListener() {
+        showProductsFromShoppingListByCategoryButton = new JButton("Display by category");
+        showProductsFromShoppingListByCategoryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 displayProductsByCategory();
             }
         });
 
-        saveListButton = new JButton("Save list to file");
-        saveListButton.addActionListener(new ActionListener() {
+        saveShoppingListToFileButton = new JButton("Save list to file");
+        saveShoppingListToFileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 saveShoppingList();
             }
@@ -122,8 +124,8 @@ public class MainMenu extends JFrame {
             }
         });
 
-        removeProductsFromCategoryButton = new JButton("Remove products from category");
-        removeProductsFromCategoryButton.addActionListener(new ActionListener() {
+        removeProductsFromShoppingListInCategoryButton = new JButton("Remove products from category");
+        removeProductsFromShoppingListInCategoryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 removeProductsFromCategory();
             }
@@ -140,16 +142,18 @@ public class MainMenu extends JFrame {
 
     private void createButtonsPanel() {
         buttonsPanel = new JPanel(new FlowLayout());
-        buttonsPanel.add(addProductButton);
-        buttonsPanel.add(removeProductButton);
-        buttonsPanel.add(removeProductsFromCategoryButton);
-        buttonsPanel.add(removeAllProductButton);
-        buttonsPanel.add(saveListButton);
-        buttonsPanel.add(showAllProductsButton);
-        buttonsPanel.add(showProductsByCategoryButton);
+        buttonsPanel.add(addProductToShoppingListButton);
+        buttonsPanel.add(removeProductFromShoppingListButton);
+        buttonsPanel.add(removeProductsFromShoppingListInCategoryButton);
+        buttonsPanel.add(clearShoppingListButton);
+        buttonsPanel.add(saveShoppingListToFileButton);
+        buttonsPanel.add(showAllProductsFromShoppingListButton);
+        buttonsPanel.add(showProductsFromShoppingListByCategoryButton);
         buttonsPanel.add(addToProductsListButton);
         buttonsPanel.add(removeFromProductsListButton);
         buttonsPanel.add(displayAvailableProductsButton);
+
+
     }
 
 
