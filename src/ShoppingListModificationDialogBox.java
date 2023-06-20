@@ -2,13 +2,13 @@ import javax.swing.*;
 
 public class ShoppingListModificationDialogBox {
 
-    private JComboBox<String> cBox = new JComboBox<>(Product.allowedTypes);
+    private final JComboBox<String> cBox = new JComboBox<>(Product.allowedTypes);
 
-    private JTextField quantityField = new JTextField();
+    private final JTextField quantityField = new JTextField();
 
-    private JTextField productField = new JTextField();
+    private final JTextField productField = new JTextField();
 
-    private JTextField categoryField = new JTextField();
+    private final JTextField categoryField = new JTextField();
 
     private final Object[] fields = {
             "type", cBox,

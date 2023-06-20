@@ -23,7 +23,8 @@ public class ShoppingListInputOutput {
         }
     }
 
-    public ShoppingList loadShoppingList() throws FileNotFoundException, IOException, NumberFormatException {
+    public ShoppingList loadShoppingList()
+            throws FileNotFoundException, IOException, NumberFormatException, DataCorruptedException {
         String string;
         ShoppingList shoppingList = new ShoppingList();
 
@@ -36,7 +37,11 @@ public class ShoppingListInputOutput {
                 } else {
                     if (category != null) {
                         String[] split = string.split("\\|");
-                        category.addProductToCategory(new Product(split[0], split[1], Float.parseFloat(split[2])));
+                        if (split.length != 3) {
+                            throw new DataCorruptedException("Shopping list");
+                        }
+
+                        category.addProductToCategory(new Product(split[0].trim(), split[1].trim(), Float.parseFloat(split[2].trim())));
                     }
                 }
             }

@@ -38,14 +38,17 @@ public class MainMenu extends JFrame {
         try {
             productsList = productsListHandler.loadProductsList();
         } catch (IOException e) {
-            System.out.println("Failed to load products list");
+            JOptionPane.showMessageDialog(this, "Failed to load products list. Creating clean list.");
             productsList = new ProductsList();
         }
 
         try {
             shoppingList = shoppingListHandler.loadShoppingList();
         } catch (IOException | NumberFormatException e) {
-            System.out.println("Failed to load shopping list");
+            JOptionPane.showMessageDialog(this, "Failed to load shopping list. Creating clean list.");
+            shoppingList = new ShoppingList();
+        } catch (DataCorruptedException p) {
+            JOptionPane.showMessageDialog(this, "Data in shopping list is corrupted. Creating clean list.");
             shoppingList = new ShoppingList();
         }
 
@@ -152,7 +155,7 @@ public class MainMenu extends JFrame {
 
 
     private void createLayout() {
-        mainMenuPanel = new JPanel(new GridLayout(1,2, 100 ,0));
+        mainMenuPanel = new JPanel(new GridLayout(1,2, 50 ,0));
         createButtonsPanel();
 
         mainMenuPanel.add(buttonsPanel);
