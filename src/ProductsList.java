@@ -28,12 +28,4 @@ public class ProductsList {
         return null;
     }
 
-    public Category findCategory(String name) {
-        for (Category i : contents) {
-            if(i.getName().equals(name)) {
-                return i;
-            }
-        }
-        return null;
-    }
 }

@@ -8,19 +8,15 @@ import java.io.IOException;
 public class MainMenu extends JFrame {
 
     private ShoppingList shoppingList;
-
     private ProductsList productsList;
 
     private JPanel mainMenuPanel;
-
     private JPanel buttonsPanel;
 
     private final ShoppingListInputOutput shoppingListHandler;
-
     private final ProductsListInputOutput productsListHandler;
 
     private JTextArea outputTextArea;
-    private JTextArea inputTextArea;
 
     private JButton showAllProductsFromShoppingListButton;
     private JButton showProductsFromShoppingListByCategoryButton;
@@ -60,9 +56,6 @@ public class MainMenu extends JFrame {
     private void initializeComponents() {
         outputTextArea = new JTextArea(20, 30);
         outputTextArea.setEditable(false);
-
-        inputTextArea = new JTextArea(10, 40);
-        inputTextArea.setEditable(true);
 
         initButtons();
     }
@@ -167,7 +160,7 @@ public class MainMenu extends JFrame {
 
         setContentPane(mainMenuPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Product Listing");
+        setTitle("Shopping list");
         pack();
         setVisible(true);
     }
