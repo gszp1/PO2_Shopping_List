@@ -142,18 +142,19 @@ public class MainMenu extends JFrame {
 
     private void createButtonsPanel() {
         buttonsPanel = new JPanel(new FlowLayout());
+
         buttonsPanel.add(addProductToShoppingListButton);
         buttonsPanel.add(removeProductFromShoppingListButton);
-        buttonsPanel.add(removeProductsFromShoppingListInCategoryButton);
         buttonsPanel.add(clearShoppingListButton);
-        buttonsPanel.add(saveShoppingListToFileButton);
+        buttonsPanel.add(removeProductsFromShoppingListInCategoryButton);
+
         buttonsPanel.add(showAllProductsFromShoppingListButton);
         buttonsPanel.add(showProductsFromShoppingListByCategoryButton);
+        buttonsPanel.add(saveShoppingListToFileButton);
+
         buttonsPanel.add(addToProductsListButton);
         buttonsPanel.add(removeFromProductsListButton);
         buttonsPanel.add(displayAvailableProductsButton);
-
-
     }
 
 
