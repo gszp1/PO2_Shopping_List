@@ -134,7 +134,7 @@ public class MainMenu extends JFrame {
     }
 
     private void createButtonsPanel() {
-        buttonsPanel = new JPanel(new FlowLayout());
+        buttonsPanel = new JPanel(new GridLayout(0,1));
 
         buttonsPanel.add(addProductToShoppingListButton);
         buttonsPanel.add(removeProductFromShoppingListButton);
@@ -152,11 +152,11 @@ public class MainMenu extends JFrame {
 
 
     private void createLayout() {
-        mainMenuPanel = new JPanel(new BorderLayout());
+        mainMenuPanel = new JPanel(new GridLayout(1,2, 100 ,0));
         createButtonsPanel();
 
-        mainMenuPanel.add(outputTextArea, BorderLayout.NORTH);
-        mainMenuPanel.add(buttonsPanel, BorderLayout.SOUTH);
+        mainMenuPanel.add(buttonsPanel);
+        mainMenuPanel.add(outputTextArea);
 
         setContentPane(mainMenuPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
