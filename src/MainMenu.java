@@ -68,7 +68,7 @@ public class MainMenu extends JFrame {
         addProductButton = new JButton("Add product to list");
         addProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                addProductToShoppingList();
             }
         });
 
@@ -167,7 +167,10 @@ public class MainMenu extends JFrame {
         String categoryName = input.getCategoryFieldText();
         String productName = input.getProductFieldText();
 
-        if((categoryName == null) || (productName == null)) {
+        if((categoryName == null) ||
+                (productName == null) ||
+                (categoryName.length() == 0) ||
+                (productName.length() == 0)) {
             return;
         }
 
@@ -346,7 +349,8 @@ public class MainMenu extends JFrame {
     }
 
     private void addProductToShoppingList() {
-
+        TwoFieldsListDialogBox input = new TwoFieldsListDialogBox();
+        
     }
 
     private void removeProductsFromCategory() {
