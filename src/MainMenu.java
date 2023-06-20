@@ -30,7 +30,8 @@ public class MainMenu extends JFrame {
     private JButton saveListButton;
     private JButton addToProductsListButton;
     private JButton removeFromProductsListButton;
-    private JButton removeProductsFromCategory;
+    private JButton removeProductsFromCategoryButton;
+    private JButton displayAvailableProductsButton;
 
     public MainMenu() {
         shoppingListHandler = new ShoppingListInputOutput();
@@ -121,10 +122,18 @@ public class MainMenu extends JFrame {
             }
         });
 
-        removeProductsFromCategory = new JButton("Remove products from category");
-        removeProductsFromCategory.addActionListener(new ActionListener() {
+        removeProductsFromCategoryButton = new JButton("Remove products from category");
+        removeProductsFromCategoryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 removeProductsFromCategory();
+            }
+        });
+
+        displayAvailableProductsButton = new JButton("Show available products");
+
+        displayAvailableProductsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                displayAvailableProducts();
             }
         });
     }
@@ -133,13 +142,14 @@ public class MainMenu extends JFrame {
         buttonsPanel = new JPanel(new FlowLayout());
         buttonsPanel.add(addProductButton);
         buttonsPanel.add(removeProductButton);
-        buttonsPanel.add(removeProductsFromCategory);
+        buttonsPanel.add(removeProductsFromCategoryButton);
         buttonsPanel.add(removeAllProductButton);
         buttonsPanel.add(saveListButton);
         buttonsPanel.add(showAllProductsButton);
         buttonsPanel.add(showProductsByCategoryButton);
         buttonsPanel.add(addToProductsListButton);
         buttonsPanel.add(removeFromProductsListButton);
+        buttonsPanel.add(displayAvailableProductsButton);
     }
 
 
@@ -415,6 +425,19 @@ public class MainMenu extends JFrame {
         }
 
         shoppingList.getContents().remove(toRemove);
+    }
+
+    private void displayAvailableProducts() {
+        String result = "";
+
+        for (Category i : productsList.getContents()) {
+            result = result.concat(i.getName()).concat(":\n");
+            for (Product j : i.getProducts()) {
+                result = result.concat("\t").concat(j.getName()).concat("\n");
+            }
+        }
+
+        outputTextArea.setText(result);
     }
 
 }
