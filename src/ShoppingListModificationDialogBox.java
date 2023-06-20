@@ -18,7 +18,7 @@ public class ShoppingListModificationDialogBox {
     };
 
     public ShoppingListModificationDialogBox() {
-        JOptionPane.showConfirmDialog(null, fields, "Select product to add", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(null, fields, "Select parameters", JOptionPane.OK_CANCEL_OPTION);
     }
 
     public String getTypeLabelContents() {

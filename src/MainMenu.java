@@ -185,11 +185,11 @@ public class MainMenu extends JFrame {
         String categoryName = input.getCategoryLabelContents();
         String productName = input.getProductLabelContents();
 
-        if((categoryName ==  null) || (categoryName.length() == 0) ||
-                (productName == null) || (productName.length() == 0) ||
-                (type == null) || (type.length() == 0) ||
+        if((categoryName ==  null) || (categoryName.length() == 0) &&
+                (productName == null) || (productName.length() == 0) &&
+                (type == null) || (type.length() == 0) &&
                 (quantityString == null) || (quantityString.length() == 0)) {
-            JOptionPane.showMessageDialog(this, "Given product is invalid.");
+            JOptionPane.showMessageDialog(this, "Not all data provided.");
             return;
         }
 
@@ -395,7 +395,7 @@ public class MainMenu extends JFrame {
                 (productName == null) || (productName.length() == 0) ||
                 (type == null) || (type.length() == 0) ||
                 (quantityString == null) || (quantityString.length() == 0)) {
-            JOptionPane.showMessageDialog(this, "Given product is invalid.");
+            JOptionPane.showMessageDialog(this, "Not all data provided.");
             return;
         }
 
