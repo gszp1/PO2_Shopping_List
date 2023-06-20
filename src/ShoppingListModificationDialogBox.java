@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class TwoFieldsListDialogBox {
+public class ShoppingListModificationDialogBox {
 
     private JComboBox<String> cBox = new JComboBox<>(Product.allowedTypes);
 
@@ -17,7 +17,7 @@ public class TwoFieldsListDialogBox {
             "category", categoryField
     };
 
-    public TwoFieldsListDialogBox() {
+    public ShoppingListModificationDialogBox() {
         JOptionPane.showConfirmDialog(null, fields, "Select product to add", JOptionPane.OK_CANCEL_OPTION);
     }
 

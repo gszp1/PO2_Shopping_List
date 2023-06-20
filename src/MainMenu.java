@@ -163,46 +163,55 @@ public class MainMenu extends JFrame {
     }
 
     private void removeProductFromShoppingList() {
-        TwoFieldsDialogBox input = new TwoFieldsDialogBox();
-        String categoryName = input.getCategoryFieldText();
-        String productName = input.getProductFieldText();
+        ShoppingListModificationDialogBox input = new ShoppingListModificationDialogBox();
+        String quantityString = input.getQuantityLabelContents();
+        String type = input.getTypeLabelContents();
+        String categoryName = input.getCategoryLabelContents();
+        String productName = input.getProductLabelContents();
 
-        if((categoryName == null) ||
-                (productName == null) ||
-                (categoryName.length() == 0) ||
-                (productName.length() == 0)) {
+        if((categoryName ==  null) || (categoryName.length() == 0) ||
+                (productName == null) || (productName.length() == 0) ||
+                (type == null) || (type.length() == 0) ||
+                (quantityString == null) || (quantityString.length() == 0)) {
+            JOptionPane.showMessageDialog(this, "Given product is invalid.");
             return;
         }
 
-        Category category = null;
-        for(Category i : shoppingList.getContents()) {
-            if(i.getName().equals(categoryName)) {
-                category = i;
-                break;
-            }
+        float quantity;
+        try {
+            quantity = Float.parseFloat(quantityString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Provided quantity is not a number.");
+            return;
         }
-        if(category == null) {
+
+        Category category = shoppingList.getCategory(categoryName);
+        if (category == null) {
             JOptionPane.showMessageDialog(this, "Category does not exist");
             return;
         }
 
         Product product = null;
-        for(Product i : category.getProducts()) {
-            if(i.getName().equals(productName)) {
-                product = i;
-                break;
+        for (Product i : category.getProducts()) {
+            if ((i.getName().equals(productName)) &&
+                    (i.getType().equals(type)) &&
+                    (i.getQuantity() == quantity)) {
+                    product = i;
+                    break;
             }
         }
-        if(product == null) {
-            JOptionPane.showMessageDialog(this, "Product does not exist in selected category");
+
+        if (product != null) {
+            if (category.getProducts().size() == 1) {
+                shoppingList.getContents().remove(category);
+            } else {
+                category.getProducts().remove(product);
+            }
+            JOptionPane.showMessageDialog(this, "Product removed successfully");
             return;
         }
 
-        category.getProducts().remove(product);
-        if (category.getProducts().size() == 0) {
-            shoppingList.getContents().remove(category);
-        }
-        JOptionPane.showMessageDialog(this, "Product removed successfully");
+        JOptionPane.showMessageDialog(this, "Product was not found in selected category.");
     }
 
     private void displayProducts(){
@@ -349,8 +358,42 @@ public class MainMenu extends JFrame {
     }
 
     private void addProductToShoppingList() {
-        TwoFieldsListDialogBox input = new TwoFieldsListDialogBox();
-        
+        ShoppingListModificationDialogBox input = new ShoppingListModificationDialogBox();
+        String categoryName = input.getCategoryLabelContents();
+        String productName = input.getProductLabelContents();
+        String type = input.getTypeLabelContents();
+        String quantityString = input.getQuantityLabelContents();
+
+        if((categoryName ==  null) || (categoryName.length() == 0) ||
+                (productName == null) || (productName.length() == 0) ||
+                (type == null) || (type.length() == 0) ||
+                (quantityString == null) || (quantityString.length() == 0)) {
+            JOptionPane.showMessageDialog(this, "Given product is invalid.");
+            return;
+        }
+
+        float quantity;
+        try {
+            quantity = Float.parseFloat(quantityString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Provided quantity is not a number.");
+            return;
+        }
+
+        if (productsList.findProduct(productName) == null) {
+            JOptionPane.showMessageDialog(this, "Such product is unavailable.");
+            return;
+        }
+
+        Category category = shoppingList.getCategory(categoryName);
+        if (category == null) {
+            category = new Category(categoryName);
+            shoppingList.addCategory(category);
+        }
+
+        category.addProductToCategory(new Product(productName, type, quantity));
+
+        JOptionPane.showMessageDialog(this, "Product added successfully.");
     }
 
     private void removeProductsFromCategory() {
